@@ -2,31 +2,66 @@
 const youDie = "\n\nYOU DIED!";
 
 // Attack function
-function attack (min, max) {
+function randomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // CHARACTER STATISTICS
-const HP = 20;
-const ATTmin = 5;
-const ATTmax = 10;
-const ATT = attack(ATTmin, ATTmax);
-//console.log(ATT);
+var charHP = 20;
+const charATTmin = 5;
+const charATTmax = 10;
+const charATT = randomNum(charATTmin, charATTmax);
+//console.log(charATT);
 
 // MONSTERS STATISTICS
 // Small monster
-const smHP = 15;
+var smHP = 15;
 const smATTmin = 3;
 const smATTmax = 10;
-const smATT = attack(smATTmin,smATTmax);
+const smATT = randomNum(smATTmin, smATTmax);
 //console.log(smATT);
 
 // Big monster
-const bmHP = 22;
+var bmHP = 22;
 const bmATTmin = 4;
 const bmATTmax = 11;
-const bmATT = attack(bmATTmin,bmATTmax);
+const bmATT = randomNum(bmATTmin, bmATTmax);
 //console.log(bmATT);
+
+var charInitiativeVal = 0;
+var monsInitiativeVal = 0;
+
+/*
+console.log("Przed", smHP);
+smHP -= charATT;
+console.log("Po", smHP);
+*/
+
+charInitiativeVal = randomNum(1, 6);
+monsInitiativeVal = randomNum(1, 6);
+console.log("Przed char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
+
+if (charInitiativeVal === monsInitiativeVal) {
+    do (charInitiativeVal = randomNum(1, 6));
+    while (charInitiativeVal === monsInitiativeVal);
+    do (monsInitiativeVal = randomNum(1, 6));
+    while (charInitiativeVal === monsInitiativeVal);
+    console.log("Po char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
+}
+else if (charInitiativeVal > monsInitiativeVal) {
+    console.log("mons HP przed:", smHP);
+    console.log("sila ataku char:", charATT);
+    smHP -= charATT;
+    console.log("mons HP:", smHP);
+}
+else {
+    console.log("char HP przed:", charHP);
+    console.log("sila ataku mons:", smATT);
+    charHP -= smATT;
+    console.log("char HP:", charHP);
+}
+
+
 
 /*
 // Ready to play?
