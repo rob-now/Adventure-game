@@ -1,6 +1,34 @@
-var ready = confirm("Are you ready to play?");
-var youDie = "\n\nYOU DIED!";
+//const ready = confirm("Are you ready to play?");
+const youDie = "\n\nYOU DIED!";
 
+// Attack function
+function attack (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// CHARACTER STATISTICS
+const HP = 20;
+const ATTmin = 5;
+const ATTmax = 10;
+const ATT = attack(ATTmin, ATTmax);
+//console.log(ATT);
+
+// MONSTERS STATISTICS
+// Small monster
+const smHP = 15;
+const smATTmin = 3;
+const smATTmax = 10;
+const smATT = attack(smATTmin,smATTmax);
+//console.log(smATT);
+
+// Big monster
+const bmHP = 22;
+const bmATTmin = 4;
+const bmATTmax = 11;
+const bmATT = attack(bmATTmin,bmATTmax);
+//console.log(bmATT);
+
+/*
 // Ready to play?
 if (ready === false) {
     confirm("You choose not to play.");
@@ -53,3 +81,4 @@ else {
     }
 }
 
+*/
