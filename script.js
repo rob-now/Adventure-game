@@ -53,18 +53,15 @@ printHealth();
 var strikeBtn = document.getElementById("strike-button");
 var message = document.getElementById("message");
 var restartButton = document.getElementById("restart-button");
-
 var charInitiativeVal = strikeOrInit(1, 6);
 var monsInitiativeVal = strikeOrInit(1, 6);
-console.log("Inicjacja char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
 
-
-// Random strike function
+// Function for generating random strike or initiative
 function strikeOrInit(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Checking the initiative (who strikes first)
+// Function for checking the initiative (who strikes first)
 function checkInitiative() {
     if (charInitiativeVal === monsInitiativeVal) {
         do (charInitiativeVal = strikeOrInit(1, 6));
@@ -92,9 +89,8 @@ function gameOver(msg) {
     message.innerText = msg;
 }
 
-// Function for character as first striker
-function characterStrikesFirst() {
-    message.innerText = "Character turn";
+// Function for standard striking order (after click on #strike-button)
+function standardStrikingOrder() {
     strikeBtn.onclick = function () {
         monsterSmall.health -= strikeOrInit(character.powerMin, character.powerMax);
         if (monsterSmall.health <= 0) {
@@ -107,30 +103,13 @@ function characterStrikesFirst() {
         }
         strikeBtn.disabled = true;
         message.innerText = "Monster turn";
-
-        // Timeout function for monster move
-        setTimeout(function () {
-            character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
-            if (character.health <= 0) {
-                character.health = 0;
-            }
-            printHealth();
-            if (isGameOver(character.health)) {
-                gameOver("You died!");
-                return;
-            }
-            strikeBtn.disabled = false;
-            message.innerText = "Character turn";
-        }, 500);
+        // Monster strikes after timeout
+        standardMonsterStrike();
     };
-
-    restartButton.hidden = true;
 }
 
-// Function for monster as first striker
-function monsterStrikesFirst() {
-    strikeBtn.disabled = true;
-    message.innerText = "Monster turn";
+// Function for striking by monster after timeout
+function standardMonsterStrike() {
     setTimeout(function () {
         character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
         if (character.health <= 0) {
@@ -143,47 +122,30 @@ function monsterStrikesFirst() {
         }
         strikeBtn.disabled = false;
         message.innerText = "Character turn";
-    }, 3000);
-
-    strikeBtn.onclick = function () {
-        monsterSmall.health -= strikeOrInit(character.powerMin, character.powerMax);
-        if (monsterSmall.health <= 0) {
-            monsterSmall.health = 0;
-        }
-        printHealth(); // Updating health value in HTML
-        if (isGameOver(monsterSmall.health)) {
-            gameOver("You won the game!");
-            return;
-        }
-        strikeBtn.disabled = true;
-        message.innerText = "Monster turn";
-
-        // Timeout function for monster move
-        setTimeout(function () {
-            character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
-            if (character.health <= 0) {
-                character.health = 0;
-            }
-            printHealth();
-            if (isGameOver(character.health)) {
-                gameOver("You died!");
-                return;
-            }
-            strikeBtn.disabled = false;
-            message.innerText = "Character turn";
-        }, 500);
-    };
-
-    restartButton.hidden = true;
-
+    }, 1000);
 }
 
+// Function for character as first striker
+function characterStrikesFirst() {
+    message.innerText = "Character turn";
+    standardStrikingOrder();
+    restartButton.hidden = true;
+}
+
+// Function for monster as first striker
+function monsterStrikesFirst() {
+    // First monster strike without user interaction
+    strikeBtn.disabled = true;
+    message.innerText = "Monster turn";
+    standardMonsterStrike();
+    standardStrikingOrder();
+    restartButton.hidden = true;
+}
+
+// Checking initiative on document reload
 checkInitiative();
 
-
-// Event handler for clicking strike button
-
-// Event handler for restart button
+// Event handler for #restart-button
 restartButton.onclick = function () {
     character.health = defaultHealth.character;
     monsterSmall.health = defaultHealth.monsterSmall;
@@ -194,7 +156,6 @@ restartButton.onclick = function () {
     charInitiativeVal = strikeOrInit(1, 6);
     monsInitiativeVal = strikeOrInit(1, 6);
     checkInitiative();
-    console.log("restart char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
 };
 
 
