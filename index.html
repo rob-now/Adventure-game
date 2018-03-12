@@ -15,25 +15,25 @@
     <h2 id="not-play" class="hidden">You choose not to play.</h2>
 </div>
 <div id="ready-decision">
-    <button id='yes'>Yes</button>
-    <button id='cancel'>Cancel</button>
+    <button id='yes-btn'>Yes</button>
+    <button id='cancel-btn'>Cancel</button>
 </div>
 <!--READY-->
 
-<!--STEP 01-->
+<!--STEP 01 - WAKE UP-->
 <div id="step-01" class="hidden">
-    <p>You wake up in a cave wondering what happened. After a while you hear a huge roar coming from the dark. The time
-        for thinking is done as you hear some movement far from your back. Now you need to run. But where is the
+    <p>You wake up in a cave or some other underground place wondering what happened. After a while you hear a huge roar coming from the dark. The time
+        for thinking is done. You hear some movement far from your back. Now you need to hurry. But where is the
         exit...?
     <p>You take first steps. You see stairs. You can go upstairs or downstairs.</p>
 </div>
 <div id="step-01-decision" class="hidden">
-    <button id='upstairs'>Go upstairs</button>
-    <button id='downstairs'>Go downstairs</button>
+    <button id='upstairs-btn'>Go upstairs</button>
+    <button id='downstairs-btn'>Go downstairs</button>
 </div>
 <!--STEP 01-->
 
-<!--STEP 02-->
+<!--STEP 02 - GO UPSTAIRS-->
 <div id="step-02" class="hidden">
     <p>You choose to go upstairs and open the door at the top. Unfortunately this makes some noise and you see some
         monster charging at front of you. It is some kind of human but heavily deformed.</p>
@@ -57,6 +57,17 @@
     <p>You choose to do nothing. The monster grabs you and eats you alive!</p>
 </div>
 <!--DO NOTHING-->
+
+<!--STEP 03-->
+<div id="step-03" class="hidden">
+    <p>You choose to go downstairs and try to open the door at the bottom. Unfortunately they are locked.</p>
+    <p>As you don't have many options you decided to turn back upstairs.</p>
+    <p>You returned to starting point. The movement sound is closer and closer... so you take the only possible way... upstairs.</p>
+</div>
+<div id="step-03-decision" class="hidden">
+    <button id='upstairs-btn2'>Go upstairs</button>
+</div>
+<!--STEP 03-->
 
 <!--FIGHTING-->
 <div id="fighting" class="hidden">
