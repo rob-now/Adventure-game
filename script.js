@@ -1,3 +1,69 @@
+var character = {
+    health: 20,
+    powerMin: 5,
+    powerMax: 10
+};
+
+var monsterSmall = {
+    health: 5,
+    powerMin: 3,
+    powerMax: 10
+};
+
+var monsterBig = {
+    health: 22,
+    powerMin: 4,
+    powerMax: 11
+};
+
+//var monster = {};
+
+const printHealth = function () {
+    document.getElementById("character-health").innerText = character.health;
+    document.getElementById("monster-health").innerText = monsterSmall.health;
+};
+printHealth();
+
+var strikeBtn = document.getElementById("strike-button");
+
+var message = document.getElementById("message");
+
+function strike(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function isGameOver(health) {
+    return health <= 0;
+}
+
+
+strikeBtn.onclick = function () {
+    monsterSmall.health -= strike(character.powerMin, character.powerMax);
+    printHealth();
+    if (isGameOver(monsterSmall.health)) {
+        message.innerText = "You won the fight!";
+        strikeBtn.disabled = true;
+        return;
+    }
+    strikeBtn.disabled = true;
+    message.innerText = "Monster turn";
+
+    setTimeout(function () {
+        character.health -= strike(monsterSmall.powerMin, monsterSmall.powerMax);
+        printHealth();
+        if (isGameOver(character.health)) {
+            message.innerText = "You died!";
+            strikeBtn.disabled = true;
+            return;
+        }
+        strikeBtn.disabled = false;
+
+        message.innerText = "";
+    }, 1000);
+};
+
+
+/*
 //const ready = confirm("Are you ready to play?");
 const youDie = "\n\nYOU DIED!";
 
@@ -31,11 +97,11 @@ const bmATT = randomNum(bmATTmin, bmATTmax);
 var charInitiativeVal = 0;
 var monsInitiativeVal = 0;
 
-/*
-console.log("Przed", smHP);
-smHP -= charATT;
-console.log("Po", smHP);
-*/
+
+//console.log("Przed", smHP);
+//smHP -= charATT;
+//console.log("Po", smHP);
+
 
 charInitiativeVal = randomNum(1, 6);
 monsInitiativeVal = randomNum(1, 6);
@@ -61,7 +127,7 @@ else {
     console.log("char HP:", charHP);
 }
 
-
+*/
 
 /*
 // Ready to play?
