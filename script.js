@@ -5,7 +5,7 @@ var character = {
 };
 
 var monsterSmall = {
-    health: 5,
+    health: 15,
     powerMin: 3,
     powerMax: 10
 };
@@ -28,6 +28,8 @@ var strikeBtn = document.getElementById("strike-button");
 
 var message = document.getElementById("message");
 
+var restartButton = document.getElementById("restart-button");
+
 function strike(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -36,13 +38,18 @@ function isGameOver(health) {
     return health <= 0;
 }
 
+function gameOver(msg) {
+    restartButton.hidden = false;
+    strikeBtn.disabled = true;
+    message.innerText = msg;
+}
+
 
 strikeBtn.onclick = function () {
     monsterSmall.health -= strike(character.powerMin, character.powerMax);
     printHealth();
     if (isGameOver(monsterSmall.health)) {
-        message.innerText = "You won the fight!";
-        strikeBtn.disabled = true;
+        gameOver("You won the game!");
         return;
     }
     strikeBtn.disabled = true;
@@ -52,14 +59,23 @@ strikeBtn.onclick = function () {
         character.health -= strike(monsterSmall.powerMin, monsterSmall.powerMax);
         printHealth();
         if (isGameOver(character.health)) {
-            message.innerText = "You died!";
-            strikeBtn.disabled = true;
+            gameOver("You died!");
             return;
         }
         strikeBtn.disabled = false;
-
         message.innerText = "";
     }, 1000);
+};
+
+restartButton.hidden = true;
+
+restartButton.onclick = function () {
+    character.health = 20;
+    monsterSmall.health = 15;
+    printHealth();
+    strikeBtn.disabled = false;
+    restartButton.hidden = true;
+    message.innerText = "";
 };
 
 
