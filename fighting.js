@@ -1,53 +1,52 @@
-function fighting() {
-
 // Default health
-    const defaultHealth = {
-        character: 20,
-        monsterSmall: 15,
-        monsterBig: 22
-    };
+const defaultHealth = {
+    character: 20,
+    monsterSmall: 15,
+    monsterBig: 22
+};
 
 // Characters statistics
-    var character = {
-        health: defaultHealth.character,
-        powerMin: 5,
-        powerMax: 10
-    };
+var character = {
+    health: defaultHealth.character,
+    powerMin: 5,
+    powerMax: 10
+};
 
-    var monsterSmall = {
+var monsterSmall = {
+    health: defaultHealth.monsterSmall,
+    powerMin: 3,
+    powerMax: 10
+};
+
+var monsterBig = {
+    health: defaultHealth.monsterBig,
+    powerMin: 4,
+    powerMax: 11
+};
+
+/*
+var monster = [
+    {
+        name: "Small monster",
         health: defaultHealth.monsterSmall,
         powerMin: 3,
         powerMax: 10
-    };
-
-    var monsterBig = {
+    },
+    {
+        name: "Big monster",
         health: defaultHealth.monsterBig,
         powerMin: 4,
         powerMax: 11
-    };
+    }
+];
+*/
 
-    /*
-    var monster = [
-        {
-            name: "Small monster",
-            health: defaultHealth.monsterSmall,
-            powerMin: 3,
-            powerMax: 10
-        },
-        {
-            name: "Big monster",
-            health: defaultHealth.monsterBig,
-            powerMin: 4,
-            powerMax: 11
-        }
-    ];
-    */
-
+function fighting(monster) {
 
 // Printing health in HTML
     const printHealth = function () {
         document.getElementById("character-health").innerText = character.health;
-        document.getElementById("monster-health").innerText = monsterSmall.health;
+        document.getElementById("monster-health").innerText = monster.health;
     };
     printHealth();
 
@@ -94,12 +93,12 @@ function fighting() {
 // Function for standard striking order (after click on #strike-button)
     function standardStrikingOrder() {
         strikeBtn.onclick = function () {
-            monsterSmall.health -= strikeOrInit(character.powerMin, character.powerMax);
-            if (monsterSmall.health <= 0) {
-                monsterSmall.health = 0;
+            monster.health -= strikeOrInit(character.powerMin, character.powerMax);
+            if (monster.health <= 0) {
+                monster.health = 0;
             }
             printHealth(); // Updating health value in HTML
-            if (isGameOver(monsterSmall.health)) {
+            if (isGameOver(monster.health)) {
                 gameOver("You won the game!");
                 return;
             }
@@ -113,7 +112,7 @@ function fighting() {
 // Function for striking by monster after timeout
     function standardMonsterStrike() {
         setTimeout(function () {
-            character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
+            character.health -= strikeOrInit(monster.powerMin, monster.powerMax);
             if (character.health <= 0) {
                 character.health = 0;
             }
@@ -150,7 +149,7 @@ function fighting() {
 // Event handler for #restart-button
     restartButton.onclick = function () {
         character.health = defaultHealth.character;
-        monsterSmall.health = defaultHealth.monsterSmall;
+        monster.health = defaultHealth.monsterSmall;
         printHealth();
         strikeBtn.disabled = false;
         restartButton.hidden = true;

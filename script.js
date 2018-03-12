@@ -16,12 +16,13 @@ confirm.onclick = function () {
     game();
 };
 
-
 function game() {
+    // STEP 01
     var step01 = document.getElementById("step-01");
     var step01Decision = document.getElementById("step-01-decision");
     step01.className = "";
     step01Decision.className = "";
+    // STEP 02
     document.getElementById("upstairs").onclick = function () {
         step01.innerHTML = "";
         step01Decision.innerHTML = "";
@@ -29,11 +30,27 @@ function game() {
         var step02Decision = document.getElementById("step-02-decision");
         step02.className = "";
         step02Decision.className = "";
-        document.getElementById("fight").onclick = function () {
+
+        // FIGHT
+        function step02Hide() {
             step02.className = "hidden";
             step02Decision.className = "hidden";
+        }
+
+        document.getElementById("fight-btn").onclick = function () {
+            step02Hide();
             document.getElementById("fighting").className = "";
-            fighting();
+            fighting(monsterSmall);
+        };
+        // RUN DOWNSTAIRS
+        document.getElementById("run-downstairs-btn").onclick = function () {
+            step02Hide();
+            document.getElementById("run-downstairs-div").className = "";
+        };
+        // DO NOTHING
+        document.getElementById("do-nothing-btn").onclick = function () {
+            step02Hide();
+            document.getElementById("do-nothing-div").className = "";
         };
     };
 }
