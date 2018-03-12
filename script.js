@@ -24,7 +24,23 @@ var monsterBig = {
     powerMax: 11
 };
 
-//var monster = {};
+/*
+var monster = [
+    {
+        name: "Small monster",
+        health: defaultHealth.monsterSmall,
+        powerMin: 3,
+        powerMax: 10
+    },
+    {
+        name: "Big monster",
+        health: defaultHealth.monsterBig,
+        powerMin: 4,
+        powerMax: 11
+    }
+];
+*/
+
 
 // Printing health in HTML
 const printHealth = function () {
@@ -38,9 +54,30 @@ var strikeBtn = document.getElementById("strike-button");
 var message = document.getElementById("message");
 var restartButton = document.getElementById("restart-button");
 
+var charInitiativeVal = strikeOrInit(1, 6);
+var monsInitiativeVal = strikeOrInit(1, 6);
+console.log("Inicjacja char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
+
+
 // Random strike function
-function strike(min, max) {
+function strikeOrInit(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Checking the initiative (who strikes first)
+function checkInitiative() {
+    if (charInitiativeVal === monsInitiativeVal) {
+        do (charInitiativeVal = strikeOrInit(1, 6));
+        while (charInitiativeVal === monsInitiativeVal);
+        do (monsInitiativeVal = strikeOrInit(1, 6));
+        while (charInitiativeVal === monsInitiativeVal);
+    }
+
+    if (charInitiativeVal > monsInitiativeVal) {
+        characterStrikesFirst();
+    } else {
+        monsterStrikesFirst();
+    }
 }
 
 // Function for checking if health is 0 or lower
@@ -55,23 +92,47 @@ function gameOver(msg) {
     message.innerText = msg;
 }
 
-// Event handler for clicking strike button
-strikeBtn.onclick = function () {
-    monsterSmall.health -= strike(character.powerMin, character.powerMax);
-    if (monsterSmall.health <= 0) {
-        monsterSmall.health = 0;
-    }
-    printHealth(); // Updating health value in HTML
-    if (isGameOver(monsterSmall.health)) {
-        gameOver("You won the game!");
-        return;
-    }
+// Function for character as first striker
+function characterStrikesFirst() {
+    message.innerText = "Character turn";
+    strikeBtn.onclick = function () {
+        monsterSmall.health -= strikeOrInit(character.powerMin, character.powerMax);
+        if (monsterSmall.health <= 0) {
+            monsterSmall.health = 0;
+        }
+        printHealth(); // Updating health value in HTML
+        if (isGameOver(monsterSmall.health)) {
+            gameOver("You won the game!");
+            return;
+        }
+        strikeBtn.disabled = true;
+        message.innerText = "Monster turn";
+
+        // Timeout function for monster move
+        setTimeout(function () {
+            character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
+            if (character.health <= 0) {
+                character.health = 0;
+            }
+            printHealth();
+            if (isGameOver(character.health)) {
+                gameOver("You died!");
+                return;
+            }
+            strikeBtn.disabled = false;
+            message.innerText = "Character turn";
+        }, 500);
+    };
+
+    restartButton.hidden = true;
+}
+
+// Function for monster as first striker
+function monsterStrikesFirst() {
     strikeBtn.disabled = true;
     message.innerText = "Monster turn";
-
-    // Timeout function for monster move
     setTimeout(function () {
-        character.health -= strike(monsterSmall.powerMin, monsterSmall.powerMax);
+        character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
         if (character.health <= 0) {
             character.health = 0;
         }
@@ -81,11 +142,46 @@ strikeBtn.onclick = function () {
             return;
         }
         strikeBtn.disabled = false;
-        message.innerText = "";
-    }, 500);
-};
+        message.innerText = "Character turn";
+    }, 3000);
 
-restartButton.hidden = true;
+    strikeBtn.onclick = function () {
+        monsterSmall.health -= strikeOrInit(character.powerMin, character.powerMax);
+        if (monsterSmall.health <= 0) {
+            monsterSmall.health = 0;
+        }
+        printHealth(); // Updating health value in HTML
+        if (isGameOver(monsterSmall.health)) {
+            gameOver("You won the game!");
+            return;
+        }
+        strikeBtn.disabled = true;
+        message.innerText = "Monster turn";
+
+        // Timeout function for monster move
+        setTimeout(function () {
+            character.health -= strikeOrInit(monsterSmall.powerMin, monsterSmall.powerMax);
+            if (character.health <= 0) {
+                character.health = 0;
+            }
+            printHealth();
+            if (isGameOver(character.health)) {
+                gameOver("You died!");
+                return;
+            }
+            strikeBtn.disabled = false;
+            message.innerText = "Character turn";
+        }, 500);
+    };
+
+    restartButton.hidden = true;
+
+}
+
+checkInitiative();
+
+
+// Event handler for clicking strike button
 
 // Event handler for restart button
 restartButton.onclick = function () {
@@ -95,74 +191,12 @@ restartButton.onclick = function () {
     strikeBtn.disabled = false;
     restartButton.hidden = true;
     message.innerText = "";
+    charInitiativeVal = strikeOrInit(1, 6);
+    monsInitiativeVal = strikeOrInit(1, 6);
+    checkInitiative();
+    console.log("restart char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
 };
 
-
-/*
-//const ready = confirm("Are you ready to play?");
-const youDie = "\n\nYOU DIED!";
-
-// Attack function
-function randomNum(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// CHARACTER STATISTICS
-var charHP = 20;
-const charATTmin = 5;
-const charATTmax = 10;
-const charATT = randomNum(charATTmin, charATTmax);
-//console.log(charATT);
-
-// MONSTERS STATISTICS
-// Small monster
-var smHP = 15;
-const smATTmin = 3;
-const smATTmax = 10;
-const smATT = randomNum(smATTmin, smATTmax);
-//console.log(smATT);
-
-// Big monster
-var bmHP = 22;
-const bmATTmin = 4;
-const bmATTmax = 11;
-const bmATT = randomNum(bmATTmin, bmATTmax);
-//console.log(bmATT);
-
-var charInitiativeVal = 0;
-var monsInitiativeVal = 0;
-
-
-//console.log("Przed", smHP);
-//smHP -= charATT;
-//console.log("Po", smHP);
-
-
-charInitiativeVal = randomNum(1, 6);
-monsInitiativeVal = randomNum(1, 6);
-console.log("Przed char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
-
-if (charInitiativeVal === monsInitiativeVal) {
-    do (charInitiativeVal = randomNum(1, 6));
-    while (charInitiativeVal === monsInitiativeVal);
-    do (monsInitiativeVal = randomNum(1, 6));
-    while (charInitiativeVal === monsInitiativeVal);
-    console.log("Po char init:", charInitiativeVal + " mons init: " + monsInitiativeVal);
-}
-else if (charInitiativeVal > monsInitiativeVal) {
-    console.log("mons HP przed:", smHP);
-    console.log("sila ataku char:", charATT);
-    smHP -= charATT;
-    console.log("mons HP:", smHP);
-}
-else {
-    console.log("char HP przed:", charHP);
-    console.log("sila ataku mons:", smATT);
-    charHP -= smATT;
-    console.log("char HP:", charHP);
-}
-
-*/
 
 /*
 // Ready to play?
