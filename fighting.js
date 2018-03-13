@@ -13,12 +13,14 @@ var character = {
 };
 
 var monsterSmall = {
+    name: "Small Monster",
     health: defaultHealth.monsterSmall,
     powerMin: 3,
     powerMax: 10
 };
 
 var monsterBig = {
+    name: "Big Monster",
     health: defaultHealth.monsterBig,
     powerMin: 4,
     powerMax: 11
@@ -54,6 +56,7 @@ function fighting(monster) {
     var strikeBtn = document.getElementById("strike-button");
     var message = document.getElementById("message");
     var restartButton = document.getElementById("restart-button");
+    var continueButton = document.getElementById("continue-button-upstairs");
     var charInitiativeVal = strikeOrInit(1, 6);
     var monsInitiativeVal = strikeOrInit(1, 6);
 
@@ -76,11 +79,19 @@ function fighting(monster) {
         } else {
             monsterStrikesFirst();
         }
+        console.log("Initiative |", "character:", charInitiativeVal, "monster:", monsInitiativeVal);
     }
 
 // Function for checking if health is 0 or lower
-    function isGameOver(health) {
+    function isFightOver(health) {
         return health <= 0;
+    }
+
+// Continue game function
+    function continueGame(msg) {
+        continueButton.hidden = false;
+        strikeBtn.disabled = true;
+        message.innerText = msg;
     }
 
 // Game over function
@@ -98,8 +109,8 @@ function fighting(monster) {
                 monster.health = 0;
             }
             printHealth(); // Updating health value in HTML
-            if (isGameOver(monster.health)) {
-                gameOver("You won the game!");
+            if (isFightOver(monster.health)) {
+                continueGame("You defeated " + monster.name + "!");
                 return;
             }
             strikeBtn.disabled = true;
@@ -117,7 +128,7 @@ function fighting(monster) {
                 character.health = 0;
             }
             printHealth();
-            if (isGameOver(character.health)) {
+            if (isFightOver(character.health)) {
                 gameOver("You died!");
                 return;
             }
@@ -131,6 +142,7 @@ function fighting(monster) {
         message.innerText = "Character turn";
         standardStrikingOrder();
         restartButton.hidden = true;
+        continueButton.hidden = true;
     }
 
 // Function for monster as first striker
@@ -141,21 +153,38 @@ function fighting(monster) {
         standardMonsterStrike();
         standardStrikingOrder();
         restartButton.hidden = true;
+        continueButton.hidden = true;
+    }
+
+// Function for hiding fighting screen
+    function fightingHide () {
+        document.getElementById("fighting").className = "hidden";
     }
 
 // Checking initiative on document reload
     checkInitiative();
 
+// Event handler for #continue-button-upstairs
+    continueButton.onclick = function () {
+        strikeBtn.disabled = false;
+        fightingHide();
+        document.getElementById("step-04").className = "";
+        document.getElementById("current-health").innerText = character.health;
+    };
+
 // Event handler for #restart-button
     restartButton.onclick = function () {
         character.health = defaultHealth.character;
-        monster.health = defaultHealth.monsterSmall;
-        printHealth();
+        monsterSmall.health = defaultHealth.monsterSmall;
+        monsterBig.health = defaultHealth.monsterBig;
+        //printHealth();
         strikeBtn.disabled = false;
-        restartButton.hidden = true;
-        message.innerText = "";
-        charInitiativeVal = strikeOrInit(1, 6);
-        monsInitiativeVal = strikeOrInit(1, 6);
-        checkInitiative();
+        //restartButton.hidden = true;
+        //message.innerText = "";
+        //charInitiativeVal = strikeOrInit(1, 6);
+        //monsInitiativeVal = strikeOrInit(1, 6);
+        //checkInitiative();
+        fightingHide();
+        game();
     };
 }

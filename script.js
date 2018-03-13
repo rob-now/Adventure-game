@@ -80,6 +80,10 @@ function game() {
         };
     }
 
+    function exit () {
+
+    }
+
     // STEP 01 - WAKE UP
     step01Show();
 
@@ -94,8 +98,13 @@ function game() {
         step03Show();
     };
 
-    // STEP 02 - UPSTAIRS
+    // STEP 02 - UPSTAIRS AFTER VISITING DOWNSTAIRS
     document.getElementById("upstairs-btn2").onclick = function () {
         upstairs();
-    }
+    };
+
+    // STEP 04 - UPSTAIRS AFTER WINNING FIGHT
+    document.getElementById("upstairs-btn3").onclick = function () {
+        exit();
+    };
 }
