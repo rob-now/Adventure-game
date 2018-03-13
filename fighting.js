@@ -43,6 +43,10 @@ var monster = [
 ];
 */
 
+const strikeBtn = document.getElementById("strike-button");
+const restartButton = document.getElementById("restart-button");
+const continueButton = document.getElementById("continue-button-upstairs");
+
 function fighting(monster) {
 
 // Printing health in HTML
@@ -53,10 +57,7 @@ function fighting(monster) {
     printHealth();
 
 // Variables declaration
-    var strikeBtn = document.getElementById("strike-button");
     var message = document.getElementById("message");
-    var restartButton = document.getElementById("restart-button");
-    var continueButton = document.getElementById("continue-button-upstairs");
     var charInitiativeVal = strikeOrInit(1, 6);
     var monsInitiativeVal = strikeOrInit(1, 6);
 
@@ -156,35 +157,13 @@ function fighting(monster) {
         continueButton.hidden = true;
     }
 
-// Function for hiding fighting screen
-    function fightingHide () {
-        document.getElementById("fighting").className = "hidden";
-    }
-
 // Checking initiative on document reload
     checkInitiative();
 
-// Event handler for #continue-button-upstairs
-    continueButton.onclick = function () {
-        strikeBtn.disabled = false;
-        fightingHide();
-        document.getElementById("step-04").className = "";
-        document.getElementById("current-health").innerText = character.health;
-    };
+// Restart functionality
+    restartBtn();
 
-// Event handler for #restart-button
-    restartButton.onclick = function () {
-        character.health = defaultHealth.character;
-        monsterSmall.health = defaultHealth.monsterSmall;
-        monsterBig.health = defaultHealth.monsterBig;
-        //printHealth();
-        strikeBtn.disabled = false;
-        //restartButton.hidden = true;
-        //message.innerText = "";
-        //charInitiativeVal = strikeOrInit(1, 6);
-        //monsInitiativeVal = strikeOrInit(1, 6);
-        //checkInitiative();
-        fightingHide();
-        game();
-    };
+// Continue functionality
+    continueBtn();
+
 }
