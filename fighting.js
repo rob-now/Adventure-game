@@ -1,8 +1,8 @@
 // Default health
 const defaultHealth = {
     character: 20,
-    monsterSmall: 15,
-    monsterBig: 22
+    monsterSmall: 18,
+    monsterBig: 25
 };
 
 // Characters statistics
@@ -51,8 +51,13 @@ function fighting(monster) {
 
 // Printing health in HTML
     const printHealth = function () {
-        document.getElementById("character-health").innerText = character.health;
-        document.getElementById("monster-health").innerText = monster.health;
+        document.getElementById("character-health").innerText = character.health + "/" + defaultHealth.character;
+        if (monster === monsterSmall) {
+            document.getElementById("monster-health").innerText = monster.health + "/" + defaultHealth.monsterSmall;
+        }
+        else if (monster === monsterBig) {
+            document.getElementById("monster-health").innerText = monster.health + "/" + defaultHealth.monsterBig;
+        }
     };
     printHealth();
 
@@ -82,6 +87,13 @@ function fighting(monster) {
         }
         console.log("Initiative |", "character:", charInitiativeVal, "monster:", monsInitiativeVal);
     }
+
+// Printing initiative in HTML
+    var printInit = function () {
+        document.getElementById("character-init").innerText = charInitiativeVal;
+        document.getElementById("monster-init").innerText = monsInitiativeVal;
+    };
+    printInit();
 
 // Function for checking if health is 0 or lower
     function isFightOver(health) {
