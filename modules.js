@@ -22,7 +22,6 @@ function restartBtn() {
 }
 
 
-
 // Event handler for #continue-button-upstairs
 function continueBtn() {
     continueButton.onclick = function () {
@@ -41,10 +40,14 @@ const step02 = document.getElementById("step-02");
 const step02Decision = document.getElementById("step-02-decision");
 const step03 = document.getElementById("step-03");
 const step03Decision = document.getElementById("step-03-decision");
+const step04 = document.getElementById("step-04");
 const runDownstairsDiv = document.getElementById("run-downstairs-div");
+const restartId = document.getElementById("restart");
+const fightingId = document.getElementById("fighting");
+const doNothing = document.getElementById("do-nothing-div");
 
 // Function for hiding all elements
-function hideAll (){
+function hideAll() {
     step01.className = "hidden";
     step01Decision.className = "hidden";
     step02.className = "hidden";
@@ -52,10 +55,10 @@ function hideAll (){
     step03.className = "hidden";
     step03Decision.className = "hidden";
     runDownstairsDiv.className = "hidden";
-    document.getElementById("restart").className = "hidden";
-    document.getElementById("fighting").className = "hidden";
-    doNothingHide();
-    document.getElementById("step-04").className = "hidden";
+    restartId.className = "hidden";
+    fightingId.className = "hidden";
+    doNothing.className = "hidden";
+    step04.className = "hidden";
 }
 
 // Functions for showing and hiding content
@@ -89,15 +92,15 @@ function step03Hide() {
     step03Decision.className = "hidden";
 }
 
-function fightingShow (){
+function fightingShow() {
     document.getElementById("fighting").className = "";
 }
 
-function doNothingShow (){
+function doNothingShow() {
     document.getElementById("do-nothing-div").className = "";
 }
 
-function doNothingHide (){
+function doNothingHide() {
     document.getElementById("do-nothing-div").className = "hidden";
 }
 
@@ -110,21 +113,14 @@ function runDownstairsHide() {
     document.getElementById("restart").className = "hidden";
 }
 
+// Function for restarting game outside the fight
 function restart() {
-    const rest = document.getElementById("restart");
-    rest.className = "";
-    rest.onclick = function () {
+    restartId.className = "";
+    restartId.onclick = function () {
         character.health = defaultHealth.character;
         monsterSmall.health = defaultHealth.monsterSmall;
         monsterBig.health = defaultHealth.monsterBig;
         strikeBtn.disabled = false;
-        /*
-        step01Hide();
-        step02Hide();
-        step03Hide();
-        runDownstairsHide();
-        fightingHide();
-        */
         hideAll();
         game();
     };
