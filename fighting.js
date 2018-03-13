@@ -15,15 +15,15 @@ var character = {
 var monsterSmall = {
     name: "Small Monster",
     health: defaultHealth.monsterSmall,
-    powerMin: 3,
-    powerMax: 10
+    powerMin: 4,
+    powerMax: 11
 };
 
 var monsterBig = {
     name: "Big Monster",
     health: defaultHealth.monsterBig,
     powerMin: 4,
-    powerMax: 11
+    powerMax: 13
 };
 
 /*
