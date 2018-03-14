@@ -65,6 +65,7 @@ function fighting(monster) {
     var message = document.getElementById("message");
     var charInitiativeVal = strikeOrInit(1, 6);
     var monsInitiativeVal = strikeOrInit(1, 6);
+    //console.log("Initiative |", "character:", charInitiativeVal, "monster:", monsInitiativeVal);
 
 // Function for generating random strike or initiative
     function strikeOrInit(min, max) {
@@ -85,15 +86,8 @@ function fighting(monster) {
         } else {
             monsterStrikesFirst();
         }
-        console.log("Initiative |", "character:", charInitiativeVal, "monster:", monsInitiativeVal);
+        //console.log("Initiative |", "character:", charInitiativeVal, "monster:", monsInitiativeVal);
     }
-
-// Printing initiative in HTML
-    var printInit = function () {
-        document.getElementById("character-init").innerText = charInitiativeVal;
-        document.getElementById("monster-init").innerText = monsInitiativeVal;
-    };
-    printInit();
 
 // Function for checking if health is 0 or lower
     function isFightOver(health) {
@@ -171,6 +165,13 @@ function fighting(monster) {
 
 // Checking initiative on document reload
     checkInitiative();
+
+// Printing initiative in HTML
+    var printInit = function () {
+        document.getElementById("character-init").innerText = charInitiativeVal;
+        document.getElementById("monster-init").innerText = monsInitiativeVal;
+    };
+    printInit();
 
 // Restart functionality
     restartBtn();

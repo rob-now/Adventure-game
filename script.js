@@ -6,14 +6,14 @@ const cancel = document.getElementById("cancel-btn");
 cancel.onclick = function () {
     document.getElementById("is-ready").className = "hidden";
     document.getElementById("not-play").className = "";
-    decisionDiv.innerHTML = "";
+    decisionDiv.className = "hidden";
 
 };
 
 const confirm = document.getElementById("yes-btn");
 confirm.onclick = function () {
-    storyDiv.innerHTML = "";
-    decisionDiv.innerHTML = "";
+    storyDiv.className = "hidden";
+    decisionDiv.className = "hidden";
     game();
 };
 
