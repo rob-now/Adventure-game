@@ -9,98 +9,101 @@
     <title>Adventure game</title>
 </head>
 <body>
-<!--READY-->
-<div id="ready">
-    <h2 id="is-ready">Are you ready to play?</h2>
-    <h2 id="not-play" class="hidden">You choose not to play.</h2>
-</div>
-<div id="ready-decision">
-    <button id='yes-btn'>Yes</button>
-    <button id='cancel-btn'>Cancel</button>
-</div>
-<!--READY-->
+<div id="container">
+    <!--READY-->
+    <div id="ready">
+        <h2 id="is-ready">Are you ready to play?</h2>
+        <h2 id="not-play" class="hidden">You choose not to play.</h2>
+    </div>
+    <div id="ready-decision">
+        <button id='yes-btn'>Yes</button>
+        <button id='cancel-btn'>Cancel</button>
+    </div>
+    <!--READY-->
 
-<!--STEP 01 - WAKE UP-->
-<div id="step-01" class="hidden">
-    <p>You wake up in a cave or some other underground place wondering what happened. After a while you hear a huge roar
-        coming from the dark. The time
-        for thinking is done. You hear some movement far from your back. Now you need to hurry. But where is the
-        exit...?
-    <p>You take first steps. You see stairs. You can go upstairs or downstairs.</p>
-</div>
-<div id="step-01-decision" class="hidden">
-    <button id='upstairs-btn'>Go upstairs</button>
-    <button id='downstairs-btn'>Go downstairs</button>
-</div>
-<!--STEP 01-->
+    <!--STEP 01 - WAKE UP-->
+    <div id="step-01" class="hidden">
+        <p>You wake up in a cave or some other underground place wondering what happened. After a while you hear a huge roar
+            coming from the dark. The time
+            for thinking is done. You hear some movement far from your back. Now you need to hurry. But where is the
+            exit...?
+        <p>You take first steps. You see stairs. You can go upstairs or downstairs.</p>
+    </div>
+    <div id="step-01-decision" class="hidden">
+        <button id='upstairs-btn'>Go upstairs</button>
+        <button id='downstairs-btn'>Go downstairs</button>
+    </div>
+    <!--STEP 01-->
 
-<!--STEP 02 - GO UPSTAIRS-->
-<div id="step-02" class="hidden">
-    <p>You choose to go upstairs and open the door at the top. Unfortunately this makes some noise and you see some
-        monster charging at front of you. It is some kind of human but heavily deformed.</p>
-    <p>What do you do?</p>
-</div>
-<div id="step-02-decision" class="hidden">
-    <button id='fight-btn'>Fight this sick monster with your bare hands</button>
-    <button id='run-downstairs-btn'>Run downstairs</button>
-    <button id='do-nothing-btn'>Do nothing</button>
-</div>
-<!--STEP 02-->
+    <!--STEP 02 - GO UPSTAIRS-->
+    <div id="step-02" class="hidden">
+        <p>You choose to go upstairs and open the door at the top. Unfortunately this makes some noise and you see some
+            monster charging at front of you. It is some kind of human but heavily deformed.</p>
+        <p>What do you do?</p>
+    </div>
+    <div id="step-02-decision" class="hidden">
+        <button id='fight-btn'>Fight this sick monster with your bare hands</button>
+        <button id='run-downstairs-btn'>Run downstairs</button>
+        <button id='do-nothing-btn'>Do nothing</button>
+    </div>
+    <!--STEP 02-->
 
-<!--RUN DOWNSTAIRS-->
-<div id="run-downstairs-div" class="hidden">
-    <p>While running downstairs you fall and break your neck.</p>
-</div>
-<!--RUN DOWNSTAIRS-->
+    <!--RUN DOWNSTAIRS-->
+    <div id="run-downstairs-div" class="hidden">
+        <p>While running downstairs you fall and break your neck.</p>
+    </div>
+    <!--RUN DOWNSTAIRS-->
 
-<!--DO NOTHING-->
-<div id="do-nothing-div" class="hidden">
-    <p>You choose to do nothing. The monster grabs you and eats you alive!</p>
-</div>
-<!--DO NOTHING-->
+    <!--DO NOTHING-->
+    <div id="do-nothing-div" class="hidden">
+        <p>You choose to do nothing. The monster grabs you and eats you alive!</p>
+    </div>
+    <!--DO NOTHING-->
 
-<!--STEP 03-->
-<div id="step-03" class="hidden">
-    <p>You choose to go downstairs and try to open the door at the bottom. Unfortunately they are locked.</p>
-    <p>As you don't have many options you decided to turn back upstairs.</p>
-    <p>You returned to starting point. The movement sound is closer and closer... so you take the only possible way...
-        upstairs.</p>
-</div>
-<div id="step-03-decision" class="hidden">
-    <button id='upstairs-btn2'>Go upstairs</button>
-</div>
-<!--STEP 03-->
+    <!--STEP 03-->
+    <div id="step-03" class="hidden">
+        <p>You choose to go downstairs and try to open the door at the bottom. Unfortunately they are locked.</p>
+        <p>As you don't have many options you decided to turn back upstairs.</p>
+        <p>You returned to starting point. The movement sound is closer and closer... so you take the only possible way...
+            upstairs.</p>
+    </div>
+    <div id="step-03-decision" class="hidden">
+        <button id='upstairs-btn2'>Go upstairs</button>
+    </div>
+    <!--STEP 03-->
 
-<!--STEP 04-->
-<div id="step-04" class="hidden">
-    <p>You defeat monster and your health is <span id="current-health"></span>.</p>
-    <p>You fill exhaustion but you keep going. You see a ladder and you climb it slowly. You suffer from wounds after
-        the fight.</p>
-    <p>Finally you manage to get to the top and there you see a door. Fortunately they open. Sunlight warms your face
-        and relief is growing inside you. You still hear the movement behind you.</p>
-    <p>You close the door and barricade it with rocks lying everywhere. You stop when you hear knocking on the door.</p>
-    <p>You are saved!</p>
-</div>
-<div id="step-04-decision" class="hidden">
-    <button id='upstairs-btn3'>Open door</button>
-</div>
-<!--STEP 04-->
+    <!--STEP 04-->
+    <div id="step-04" class="hidden">
+        <p>You defeat monster and your health is <span id="current-health"></span>.</p>
+        <p>You fill exhaustion but you keep going. You see a ladder and you climb it slowly. You suffer from wounds after
+            the fight.</p>
+        <p>Finally you manage to get to the top and there you see a door. Fortunately they open. Sunlight warms your face
+            and relief is growing inside you. You still hear the movement behind you.</p>
+        <p>You close the door and barricade it with rocks lying everywhere. You stop when you hear knocking on the door.</p>
+        <p>You are saved!</p>
+    </div>
+    <div id="step-04-decision" class="hidden">
+        <button id='upstairs-btn3'>Open door</button>
+    </div>
+    <!--STEP 04-->
 
-<!--FIGHTING-->
-<div id="fighting" class="hidden">
-    <h2>Initiative [ character: <span id="character-init"></span> | monster: <span id="monster-init"></span> ]</h2>
-    <h2>Character HP: <span id="character-health"></span></h2>
-    <h2>Monster HP: <span id="monster-health"></span></h2>
-    <button id="strike-button">Strike</button>
-    <button id="restart-button">Restart game</button>
-    <button id="continue-button-upstairs">Continue</button>
-    <h2 id="message"></h2>
-</div>
-<!--FIGHTING-->
+    <!--FIGHTING-->
+    <div id="fighting" class="hidden">
+        <h2>Initiative [ character: <span id="character-init"></span> | monster: <span id="monster-init"></span> ]</h2>
+        <h2>Character HP: <span id="character-health"></span></h2>
+        <h2>Monster HP: <span id="monster-health"></span></h2>
+        <button id="strike-button">Strike</button>
+        <button id="restart-button">Restart game</button>
+        <button id="continue-button-upstairs">Continue</button>
+        <h2 id="message"></h2>
+    </div>
+    <!--FIGHTING-->
 
-<div>
-    <button id="restart" class="hidden">Restart game</button>
+    <div>
+        <button id="restart" class="hidden">Restart game</button>
+    </div>
 </div>
+
 
 
 <script src="modules.js"></script>

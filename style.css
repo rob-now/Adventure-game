@@ -1,3 +1,38 @@
 .hidden {
     display: none;
 }
+
+body {
+    font-family: serif;
+    width: 600px;
+    margin: 20px auto;
+    background: #eee;
+    color: #e2e2e2;
+}
+
+div {
+    width: 600px;
+    margin: auto;
+    padding: 20px 0;
+    text-align: center;
+    background: #444;
+}
+
+#container {
+    height: 450px;
+}
+
+#ready, #ready-decision {
+    padding-top: 30px;
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+button {
+    font-size: 14px;
+    cursor: pointer;
+}
